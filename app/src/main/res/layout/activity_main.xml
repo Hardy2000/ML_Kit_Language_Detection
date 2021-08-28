@@ -11,11 +11,12 @@
         android:id="@+id/toolBar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/white"
+        android:background="#0277BD"
         android:elevation="@dimen/cardview_default_elevation"
         app:circularflow_defaultRadius="@dimen/cardview_default_radius"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="Language Detection">
+        app:title="Language Detection"
+        app:titleTextColor="@color/white">
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -46,20 +47,19 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
             android:hint="Enter String :"
+            android:inputType="textMultiLine"
             android:maxLines="3"
             android:paddingLeft="10dp"
-            android:paddingBottom="5dp"
             android:paddingTop="3dp"
-            android:background="@drawable/border_text"
-            android:inputType="textMultiLine"
-            android:textColorHint="@color/black" />
+            android:paddingBottom="5dp"
+            android:textColorHint="#554F4F" />
 
         <ScrollView
             android:id="@+id/scrollView"
-            android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_weight="1"
             android:background="@drawable/border_text">
 
@@ -72,10 +72,11 @@
                     android:id="@+id/textSingleResult"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="monospace"
                     android:layout_margin="3dp"
+                    android:fontFamily="monospace"
                     android:padding="5dp"
                     android:textAlignment="center"
+                    android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
         </ScrollView>
@@ -86,9 +87,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#1565C0"
             android:text="Identify Language"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/buttonAll"
@@ -97,10 +98,10 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="50dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="#1565C0"
             android:text="Identify Possible Languages"
             android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 

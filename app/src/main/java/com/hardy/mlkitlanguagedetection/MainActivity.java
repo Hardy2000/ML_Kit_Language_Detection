@@ -1,10 +1,6 @@
 package com.hardy.mlkitlanguagedetection;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,10 +11,11 @@ import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.mlkit.nl.languageid.IdentifiedLanguage;
 import com.google.mlkit.nl.languageid.LanguageIdentification;
 import com.google.mlkit.nl.languageid.LanguageIdentifier;
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     ImageButton imageButton;
     TextView textViewSingle;
     private LanguageIdentifier languageIdentifier;
-ScrollView scrollView;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,28 +45,22 @@ ScrollView scrollView;
         buttonAll = findViewById(R.id.buttonAll);
         textViewSingle = findViewById(R.id.textSingleResult);
         imageButton = findViewById(R.id.imageButton);
-        scrollView=findViewById(R.id.scrollView);
+        scrollView = findViewById(R.id.scrollView);
         scrollView.setVisibility(View.INVISIBLE);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                scrollView.setVisibility(View.INVISIBLE);
-                editText.setText("");
-                textViewSingle.setText("");
-            }
+        imageButton.setOnClickListener(view -> {
+            scrollView.setVisibility(View.INVISIBLE);
+            editText.setText("");
+            textViewSingle.setText("");
         });
 
-        buttonSingle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                hideKeyboard();
-                String input = getInputText();
-                if (input.isEmpty()) {
-                    return;
-                }
-                checkLanguage(input);
+        buttonSingle.setOnClickListener(view -> {
+            hideKeyboard();
+            String input = getInputText();
+            if (input.isEmpty()) {
+                return;
             }
+            checkLanguage(input);
         });
 
         buttonAll.setOnClickListener(view -> {
@@ -101,11 +92,11 @@ ScrollView scrollView;
 
 
     private void checkLanguage(String textLanguage) {
-scrollView.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.VISIBLE);
         languageIdentifier.identifyLanguage(textLanguage)
                 .addOnSuccessListener(s -> {
                     if (s.equals("und")) {
-                        textViewSingle.setText("Sorry !! \n\nCan't identify the Language");
+                        textViewSingle.setText(getString(R.string.identificationFailed));
                     } else {
 
                         Locale locale = new Locale(s);
@@ -114,6 +105,8 @@ scrollView.setVisibility(View.VISIBLE);
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                Log.v(TAG, "Language identification error", e);
+                textViewSingle.setText("Error : " + e);
 
             }
         });
@@ -121,7 +114,7 @@ scrollView.setVisibility(View.VISIBLE);
 
 
     private void checkAllLanguage(String input) {
-     scrollView.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.VISIBLE);
         languageIdentifier
                 .identifyPossibleLanguages(input)
                 .addOnSuccessListener(

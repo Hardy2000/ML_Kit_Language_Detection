@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ML Kit Language Detection</string>
+    <string name="identificationFailed">Sorry !! \n\nCan\'t identify the Language</string>
 
 </resources>
